@@ -170,14 +170,10 @@ poetry.toml
 
 # LSP config files
 pyrightconfig.json
-<<<<<<< Updated upstream
 
 src/gan/
-=======
-<<<<<<< HEAD
+
 
 *.vcd
 *.vvp
-=======
->>>>>>> parent of 32aa855 (init)
->>>>>>> Stashed changes
+
