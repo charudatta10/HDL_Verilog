@@ -62,8 +62,11 @@ tests:
 
 #########-ADD-Custom-Tasks-Here-##################
 
-
-
+run file_name:
+    #!pwsh
+    iverilog -o build/{{file_name}}.vvp src/{{file_name}}.v tests/test_{{file_name}}.v
+    vvp build/{{file_name}}.vvp
+    gtkwave build/{{file_name}}.vcd
 
 
         

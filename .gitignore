@@ -171,9 +171,11 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 
+
 src/gan/
 
 
 *.vcd
 *.vvp
+*.npy
 
