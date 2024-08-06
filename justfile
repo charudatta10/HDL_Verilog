@@ -68,6 +68,15 @@ run file_name:
     vvp build/{{file_name}}.vvp
     gtkwave build/{{file_name}}.vcd
 
+runx:
+    #!pwsh
+    #conda activate n
+    #python ../src/gan.py 
+    cd build
+    iverilog -o gan.vvp test_gan.v
+    vvp gan.vvp
+    gtkwave gan.vcd 
+
 
         
 
