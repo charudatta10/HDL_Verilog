@@ -19,48 +19,59 @@
 set windows-shell := ["pwsh.exe", "-NoLogo", "-Command"]
 
 default:
-    just --list --unsorted
+    @just --choose
 
+# create files and directories
 init:
     #!pwsh
     git init
-    New-Item -ItemType "file" -Path ".gitattribute", "main.py", "requirement.yaml"
-    New-Item -ItemType "directory" -Path "archives", "docs", "src", "tests"
-    New-Item -ItemType "file" -Path .\* -Name "__init__.py" -ErrorAction SilentlyContinue
+    New-Item -ItemType "file" -Path ".env", ".gitattribute", "main.py", "requirements.yaml"
+    New-Item -ItemType "directory" -Path "docs", "src", "tests"
     gig gen python > .gitignore 
-    u
+    Add-LicenseHeader
+    7z a archives.7z .gitignore
 
+# set configuration variables
 config:
-    dynaconf init -f json 
+    #!pwsh
+    SetEnvVar
 
+# add documentation to repo
 docs:
     #!pwsh
     conda activate blog
     python -m mkdocs new .
-    
+
+# genearte and readme to repo    
 readme:
     #!pwsh
     conda activate w
-    python C:/Users/chaitrali/Documents/GitHub/readmeGen/main.py
+    python C:/Users/$env:username/Documents/GitHub/readmeGen/main.py
 
+# version control repo with git
 commit message="init":
     #!pwsh
     git add .
     git commit -m {{message}}
 
+# create windows executable
 exe file_name:
     #!pwsh
     pyinstaller src/{{file_name}} --onefile
 
+# run python unit test 
 tests:
     #!pwsh
     python -m unittest discover -s tests
 
-#alias b := build
-#build: 
-#   echo "hi"; echo "bye"
+# Add custom tasks, enviroment variables
 
-#########-ADD-Custom-Tasks-Here-##################
+exit:
+    #!pwsh
+    write-Host "Copyright © 2024 Charudatta"
+    Write-Host "email contact: 152109007c@gmailcom"
+    Write-Host "Exiting Folder" 
+    [System.IO.Path]::GetFileName($(Get-Location))
 
 run file_name:
     #!pwsh
